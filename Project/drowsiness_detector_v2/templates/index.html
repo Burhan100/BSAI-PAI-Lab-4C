@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Driver Drowsiness Detector</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+  <div class="container">
+
+    <header>
+      <h1>🚗 Driver Drowsiness Detector</h1>
+      <p class="subtitle">Real-time eye monitoring using OpenCV + dlib</p>
+    </header>
+
+    <div class="main-grid">
+
+      <!-- Camera Feed -->
+      <div class="camera-box">
+        <img id="videoFeed" src="/video_feed" alt="Camera Feed"/>
+        <div id="overlay" class="overlay hidden">⚠️ DROWSY ALERT!</div>
+      </div>
+
+      <!-- Stats Panel -->
+      <div class="stats-panel">
+
+        <div class="status-card" id="statusCard">
+          <div class="status-icon" id="statusIcon">👁️</div>
+          <div class="status-label">Status</div>
+          <div class="status-value" id="statusText">Monitoring...</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Eye Aspect Ratio (EAR)</div>
+          <div class="metric-value" id="earValue">0.000</div>
+          <div class="metric-bar-bg">
+            <div class="metric-bar" id="earBar"></div>
+          </div>
+          <div class="metric-hint">Threshold: 0.25 — below this = eyes closed</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Closed Frame Count</div>
+          <div class="metric-value" id="frameCount">0</div>
+          <div class="metric-hint">Alert triggers at 20 consecutive frames</div>
+        </div>
+
+        <div class="info-box">
+          <h3>How it works</h3>
+          <ul>
+            <li>dlib detects 68 face landmarks</li>
+            <li>EAR calculated from eye landmarks</li>
+            <li>EAR &lt; 0.25 = eyes closed</li>
+            <li>Alert if closed for 20+ frames</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <audio id="alarmSound" loop>
+    <source src="{{ url_for('static', filename='sounds/574585__outlawsoftware__alarm-loop-4-v2.wav') }}" type="audio/wav"/>
+    <source src="{{ url_for('static', filename='sounds/alarm.mp3') }}" type="audio/mpeg"/>
+  </audio>
+
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
