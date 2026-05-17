@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>QnA Bot - Lab 12</title>
+    <style>
+        body { font-family: Arial; background: #f5f5f5; padding: 30px; }
+        .chat-box { background: white; padding: 20px; border-radius: 10px; max-width: 600px; margin: auto; }
+        .message { padding: 8px 12px; margin: 5px 0; border-radius: 8px; }
+        .You { background: #d1f0ff; text-align: right; }
+        .Bot { background: #e8e8e8; text-align: left; }
+        form { display: flex; margin-top: 10px; }
+        input { flex: 1; padding: 10px; font-size: 15px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px 20px; background: #4a90d9; color: white; border: none; border-radius: 5px; margin-left: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="chat-box">
+        <h2>🤖 QnA Bot (FAISS + MiniLM)</h2>
+        <p>Ask anything about university admissions!</p>
+
+        <div>
+            {% for sender, msg in chat %}
+            <div class="message {{ sender }}">
+                <strong>{{ sender }}:</strong> {{ msg }}
+            </div>
+            {% endfor %}
+        </div>
+
+        <form method="POST">
+            <input type="text" name="question" placeholder="Type your question..." required autofocus>
+            <button type="submit">Ask</button>
+        </form>
+    </div>
+</body>
+</html>
